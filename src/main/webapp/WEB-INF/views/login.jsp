@@ -46,17 +46,26 @@
             let form = layui.form
             form.on('submit(login)', function (data) {
                 $.ajax({
-                    url: '${pageContext.request.contextPath}/admin/admin?m=login',
+                    url: '${pageContext.request.contextPath}/admin/admin?m=login2',
                     type: 'POST',
                     data: data.field,
                     dataType: 'json',
+                    success: function (res) {
+                        if (res['code'] === 200) {
+                            layer.msg(res.message, {icon: 1, time: 1500}, () => {
+                                location.href = '${pageContext.request.contextPath}/admin/index?m=mainView'
+                            })
+                        } else {
+                            layer.msg(res.message, {icon: 2, time: 2000})
+                        }
+                    },
+                    error: function () {
+                        layer.msg("服务器故障!")
+                    }
                 })
-                return false;
             })
         })
     })
-
-
 </script>
 
 
