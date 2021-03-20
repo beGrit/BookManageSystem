@@ -59,7 +59,6 @@ public class AdminUserServiceImpl implements AdminUserService {
     public void login(HttpServletRequest req, HttpServletResponse resp) throws UpdateFailedException, AuthenticationFailException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        req.setAttribute("a", "hahaha");
         ResponseDto responseDto = login(username, password);
         if (responseDto != null) {
             try {

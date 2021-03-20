@@ -44,25 +44,27 @@
     $(function () {
         layui.use('form', function () {
             let form = layui.form
-            form.on('submit(login)', function (data) {
-                $.ajax({
-                    url: '${pageContext.request.contextPath}/admin/admin?m=login2',
-                    type: 'POST',
-                    data: data.field,
-                    dataType: 'json',
-                    success: function (res) {
-                        if (res['code'] === 200) {
-                            layer.msg(res.message, {icon: 1, time: 1500}, () => {
-                                location.href = '${pageContext.request.contextPath}/admin/index?m=mainView'
+            form.on('submit(login)',function (data) {
+                $.ajax({/*执行jquery的异步请求方法*/
+                    url:'${pageContext.request.contextPath}/admin/admin?m=login2',/*请求的服务器地址，并携带参数m*/
+                    type:'post',/*请求的方法*/
+                    dataType:'json',/*期望服务器返回json格式的数据*/
+                    data:data.field,/*提交给服务器的数据*/
+                    success:function (res) {/*服务器成功响应后执行的回调函数，参数res为服务器响应的数据*/
+                        if (res.code === 200){
+                            layer.msg(res.message,{icon:1,time:1500},function () {
+                                location.href = '${pageContext.request.contextPath}/my/index?m=mainView';
                             })
-                        } else {
-                            layer.msg(res.message, {icon: 2, time: 2000})
+                        }else{
+                            layer.msg(res.message,{icon:2,time:2000})
                         }
                     },
-                    error: function () {
+                    error:function () {
                         layer.msg("服务器故障!")
                     }
                 })
+                /*屏蔽表单submit事件的默认提交行为*/
+                return false;
             })
         })
     })
