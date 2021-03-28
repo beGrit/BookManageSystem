@@ -1,11 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: lsf
-  Date: 3/17/21
-  Time: 7:50 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html;charset=utf-8" language="java"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,14 +39,14 @@
             let form = layui.form
             form.on('submit(login)',function (data) {
                 $.ajax({/*执行jquery的异步请求方法*/
-                    url:'${pageContext.request.contextPath}/admin/admin?m=login2',/*请求的服务器地址，并携带参数m*/
+                    url:'${pageContext.request.contextPath}/common/login?m=login',/*请求的服务器地址，并携带参数m*/
                     type:'post',/*请求的方法*/
                     dataType:'json',/*期望服务器返回json格式的数据*/
                     data:data.field,/*提交给服务器的数据*/
                     success:function (res) {/*服务器成功响应后执行的回调函数，参数res为服务器响应的数据*/
                         if (res.code === 200){
                             layer.msg(res.message,{icon:1,time:1500},function () {
-                                location.href = '${pageContext.request.contextPath}/my/index?m=mainView';
+                                location.href = '${pageContext.request.contextPath}/admin/index?m=mainView';
                             })
                         }else{
                             layer.msg(res.message,{icon:2,time:2000})

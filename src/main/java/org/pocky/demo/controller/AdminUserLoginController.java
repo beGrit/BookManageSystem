@@ -6,18 +6,16 @@ import org.pocky.demo.exceptions.UpdateFailedException;
 import org.pocky.demo.service.AdminUserService;
 import org.pocky.demo.service.impl.AdminUserServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-@WebServlet(name = "AdminController", value = "/admin/admin")
+@WebServlet(name = "AdminController", value = "/common/login")
 public class AdminUserLoginController extends BaseController {
 
     private AdminUserService adminUserService = new AdminUserServiceImpl();
 
-    public void login(HttpServletRequest req, HttpServletResponse resp) {
+    public void login2(HttpServletRequest req, HttpServletResponse resp) {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         try {
@@ -29,7 +27,7 @@ public class AdminUserLoginController extends BaseController {
         }
     }
 
-    public void login2(HttpServletRequest req, HttpServletResponse resp) {
+    public void login(HttpServletRequest req, HttpServletResponse resp) {
         try {
             adminUserService.login(req, resp);
         } catch (UpdateFailedException e) {

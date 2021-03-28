@@ -5,7 +5,7 @@
   Time: 2:20 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,8 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    *-*
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/font.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/xadmin.css">
@@ -26,7 +26,7 @@
 <body>
 <!-- 顶部开始 -->
 <div class="container">
-    <div class="logo"><a href="./index.html">X-adminUser v2.0</a></div>
+    <div class="logo"><a href="./index.html">X-admin v2.0</a></div>
     <div class="left_open">
         <i title="展开左侧栏" class="iconfont">&#xe699;</i>
     </div>
@@ -42,7 +42,7 @@
     </ul>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">adminUser</a>
+            <a href="javascript:;">admin</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
                 <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
@@ -62,55 +62,16 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>
-                    <cite>会员管理</cite>
+                    <cite>书籍管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="member-list.html">
+                        <a _href="${pageContext.request.contextPath}/admin/book?m=bookList&pageIndex=1&pageSize=6">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表</cite>
-
+                            <cite>书籍列表</cite>
                         </a>
-                    </li>
-                    <li>
-                        <a _href="member-del.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员删除</cite>
-
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe70b;</i>
-                            <cite>会员管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="xxx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员列表</cite>
-
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="xx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员删除</cite>
-
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="xx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>等级管理</cite>
-
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
+                    </li >
                 </ul>
             </li>
             <li>
@@ -125,7 +86,7 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>订单列表</cite>
                         </a>
-                    </li>
+                    </li >
                 </ul>
             </li>
             <li>
@@ -140,7 +101,7 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>多级分类</cite>
                         </a>
-                    </li>
+                    </li >
                 </ul>
             </li>
             <li>
@@ -155,7 +116,7 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>三级地区联动</cite>
                         </a>
-                    </li>
+                    </li >
                 </ul>
             </li>
             <li>
@@ -166,29 +127,29 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="adminUser-list.html">
+                        <a _href="admin-list.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理员列表</cite>
                         </a>
-                    </li>
+                    </li >
                     <li>
-                        <a _href="adminUser-role.html">
+                        <a _href="admin-role.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色管理</cite>
                         </a>
-                    </li>
+                    </li >
                     <li>
-                        <a _href="adminUser-cate.html">
+                        <a _href="admin-cate.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>权限分类</cite>
                         </a>
-                    </li>
+                    </li >
                     <li>
-                        <a _href="adminUser-rule.html">
+                        <a _href="admin-rule.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>权限管理</cite>
                         </a>
-                    </li>
+                    </li >
                 </ul>
             </li>
             <li>
@@ -203,7 +164,7 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>拆线图</cite>
                         </a>
-                    </li>
+                    </li >
                     <li>
                         <a _href="echarts2.html">
                             <i class="iconfont">&#xe6a7;</i>
@@ -276,7 +237,7 @@
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='./welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='${pageContext.request.contextPath}/admin/index?m=welcomeView' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
         </div>
     </div>
@@ -286,9 +247,9 @@
 <!-- 中部结束 -->
 <!-- 底部开始 -->
 <div class="footer">
-    <div class="copyright">Copyright ©2017 x-adminUser 2.3 All Rights Reserved 更多模板：<a href="http://www.mycodes.net/"
-                                                                                       target="_blank">源码之家</a></div>
+    <div class="copyright">Copyright ©2017 x-admin 2.3 All Rights Reserved  更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></div>
 </div>
 <!-- 底部结束 -->
+
 </body>
 </html>

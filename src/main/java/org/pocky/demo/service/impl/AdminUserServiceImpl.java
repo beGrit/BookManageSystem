@@ -62,6 +62,7 @@ public class AdminUserServiceImpl implements AdminUserService {
         ResponseDto responseDto = login(username, password);
         if (responseDto != null) {
             try {
+                req.getSession().setAttribute("user", username + password);
                 resp.getWriter().write(JsonResponseUtil.response(responseDto));
             } catch (IOException e) {
                 e.printStackTrace();
