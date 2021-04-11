@@ -1,10 +1,10 @@
 package org.pocky.demo.controller;
 
-import org.pocky.demo.dto.ResponseDto;
+import org.pocky.demo.dto.JsonResponse;
 import org.pocky.demo.exceptions.AuthenticationFailException;
 import org.pocky.demo.exceptions.UpdateFailedException;
-import org.pocky.demo.service.AdminUserService;
-import org.pocky.demo.service.impl.AdminUserServiceImpl;
+import org.pocky.demo.service.admin.AdminUserService;
+import org.pocky.demo.service.admin.impl.AdminUserServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ public class AdminUserLoginController extends BaseController {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         try {
-            ResponseDto rtn = adminUserService.login(username, password);
+            JsonResponse rtn = adminUserService.login(username, password);
         } catch (AuthenticationFailException e) {
             e.printStackTrace();
         } catch (UpdateFailedException e) {

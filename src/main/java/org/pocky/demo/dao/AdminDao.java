@@ -1,7 +1,7 @@
 package org.pocky.demo.dao;
 
 
-import org.pocky.demo.beans.AdminUser;
+import org.pocky.demo.models.AdminUser;
 
 import java.sql.SQLException;
 import java.util.Date;

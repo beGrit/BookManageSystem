@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
-public class PageBar<T> {
+public class PageBar {
     private Integer curPageIndex;
     private Integer prePageIndex;
     private Integer nextPageIndex;

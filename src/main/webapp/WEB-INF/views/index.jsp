@@ -51,7 +51,6 @@
         </li>
         <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>
     </ul>
-
 </div>
 <!-- 顶部结束 -->
 <!-- 中部开始 -->
@@ -250,6 +249,5 @@
     <div class="copyright">Copyright ©2017 x-admin 2.3 All Rights Reserved  更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></div>
 </div>
 <!-- 底部结束 -->
-
 </body>
 </html>

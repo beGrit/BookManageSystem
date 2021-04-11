@@ -1,7 +1,7 @@
 package org.pocky.demo.dao;
 
 import org.junit.jupiter.api.Test;
-import org.pocky.demo.beans.AdminUser;
+import org.pocky.demo.models.AdminUser;
 import org.pocky.demo.dao.impl.AdminDaoImpl;
 
 import java.sql.Date;

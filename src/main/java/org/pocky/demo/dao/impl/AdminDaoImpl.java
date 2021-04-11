@@ -1,7 +1,7 @@
 package org.pocky.demo.dao.impl;
 
 import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.pocky.demo.beans.AdminUser;
+import org.pocky.demo.models.AdminUser;
 import org.pocky.demo.dao.AdminDao;
 import org.pocky.demo.dao.BaseDao;
 import org.springframework.stereotype.Repository;

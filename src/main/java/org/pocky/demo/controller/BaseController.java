@@ -23,6 +23,5 @@ public class BaseController extends HttpServlet {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -11,12 +11,13 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/font.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/xadmin.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/lib/layui/layui.js"
-            charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath}/static/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/xadmin.js"></script>
+
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -46,15 +47,19 @@
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./adminUser-add.html')"><i class="layui-icon"></i>添加
+        <button class="layui-btn"
+                onclick="x_admin_show('Add_Book','${pageContext.request.contextPath}/admin/index?m=addBookView')"><i
+                class="layui-icon"></i>添加
         </button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
+    <%--分页内容PageContent--%>
     <table class="layui-table">
         <thead>
         <tr>
             <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary">
+                    <i>
                         class="layui-icon">&#xe605;</i></div>
             </th>
             <th>序列号</th>
@@ -96,6 +101,7 @@
         </c:if>
         </tbody>
     </table>
+    <%--分页条PageBar--%>
     <div class="page">
         <div>
             <a class="prev"
@@ -113,6 +119,10 @@
                href="${pageContext.request.contextPath}/admin/book?m=bookList&pageIndex=${pageBar.nextPageIndex}">&gt;&gt;</a>
         </div>
     </div>
+    <%--表格--%>
+    <table id="demo" lay-filter="tableList">
+
+    </table>
 </div>
 <script>
     layui.use('laydate', function () {
@@ -128,6 +138,27 @@
             elem: '#end' //指定元素
         });
     });
+
+    layui.use('table', () => {
+        let table = layui.table
+        table.render({
+            elem: '#demo',
+            height: '312',
+            url: '${pageContext.request.contextPath}/admin/book?m=bookList', // 数据接口,
+            page: true,
+            cols: [[ // 表头 theade
+                {field: 'bno', title: 'ID', width: 80, sort: true, fixed: 'left'},
+                {field: 'bname', title: '书籍名', width: 200},
+                {field: 'author', title: '书籍作者',},
+                {field: 'price', title: '单品价格',},
+                {field: 'publish', title: '出版社'},
+                {field: 'bookNumber', title: '书籍数量'},
+            ]],
+            parseData: (res) => {
+
+            }
+        })
+    })
 
     /*用户-停用*/
     function member_stop(obj, id) {
@@ -174,7 +205,5 @@
     }
 
 </script>
-
 </body>
-
 </html>

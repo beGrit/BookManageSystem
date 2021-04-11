@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layPage快速使用</title>
+    <link rel="stylesheet" href="/static/build/layui.css" media="all">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../../static/css/font.css">
+    <link rel="stylesheet" href="../../..//static/css/xadmin.css">
+    <script src="../../../static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../static/js/xadmin.js"></script>
+</head>
+<body>
+<!--表格-->
+<table id="pageContent" class="layui-table" lay-filter="tableList">
+
+</table>
+<div id="pageBar"></div>
+<script src="../../../static/lib/layui/layui.js"></script>
+<script>
+    layui.use('laypage', function () {
+        var laypage = layui.laypage;
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'pageBar' //注意，这里的 test1 是 ID，不用加 # 号
+            , count: 50 //数据总数，从服务端得到
+        });
+    })
+
+    // 初始化渲染
+    layui.use('table', () => {
+        const table = layui.table
+        $.ajax()
+        table.render({
+            id: "bookTable",
+            elem: '#pageContent',
+            height: '312',
+            url: 'http://localhost:8999/demo_war_exploded/admin/api/book?m=allBook', // 'http://localhost:8999/demo_war_exploded/admin/book?m=bookList', // 数据接口,
+            page: false,
+            cols: [[ // 表头 theade
+                {field: 'bno', title: 'ID', width: 80, sort: true, fixed: 'left'},
+                {field: 'bname', title: '书籍名', width: 200},
+                {field: 'author', title: '书籍作者',},
+                {field: 'price', title: '单品价格',},
+                {field: 'publish', title: '出版社'},
+                {field: 'bookNumber', title: '书籍数量'},
+            ]],
+            parseData: (res) => {
+                return {
+                    'code': res.code,
+                    'msg': res.msg,
+                    'count': 100,
+                    'data': res.data,
+                }
+            }
+        })
+        let checkStatus = table.checkStatus('bookTable')
+        console.log("bookTable", typeof checkStatus)
+        console.log(checkStatus.data)
+    })
+
+    let selector = document.querySelector('#test1')
+    console.log(typeof selector)
+</script>
+</body>
+</html>

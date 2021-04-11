@@ -1,14 +1,14 @@
 package org.pocky.demo.service;
 
 import org.junit.jupiter.api.Test;
-import org.pocky.demo.beans.Book;
+import org.pocky.demo.models.Book;
 import org.pocky.demo.common.Page;
-import org.pocky.demo.common.PageContentInfo;
 import org.pocky.demo.common.PageParam;
-import org.pocky.demo.exceptions.PageNotFoundException;
-import org.pocky.demo.service.impl.BookServiceImpl;
+import org.pocky.demo.exceptions.bookstore.QueryPageFailedException;
+import org.pocky.demo.service.book.BookService;
+import org.pocky.demo.service.book.impl.BookServiceImpl;
 
-import java.sql.SQLException;
+import java.util.List;
 
 class BookServiceTest {
 
@@ -19,8 +19,25 @@ class BookServiceTest {
     }
 
     @Test
-    void pageQuery() throws PageNotFoundException, SQLException {
-        Page<Book> pageContentInfo = bookService.queryDbByPage(new PageParam(5, 4));
-        System.out.println(pageContentInfo);
+    void pageQuery() {
+        Page<Book> pageContentInfo = null;
+        try {
+            pageContentInfo = bookService.queryByPageParam(new PageParam(5, 4));
+            System.out.println(pageContentInfo);
+        } catch (QueryPageFailedException e) {
+            // 请求失败错误处理
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void queryAllByKeyWord() throws QueryPageFailedException {
+        List<Book> books = bookService.queryAllByKeyWord("数据库");
+        System.out.println(books);
+    }
+
+    @Test
+    void queryPageByKeyword() {
+
     }
 }
