@@ -1,6 +1,6 @@
 package org.pocky.demo.controller;
 
-import org.pocky.demo.service.book.UploadImageService;
+import org.pocky.demo.service.commons.UploadImageService;
 import org.pocky.demo.service.book.impl.UploadImageServiceImpl;
 
 import javax.servlet.ServletException;

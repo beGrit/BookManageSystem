@@ -33,7 +33,7 @@ public class ImageUploadHandler extends FileUploadHandler {
     }
 
 
-    public boolean check() {
+    public boolean checkRequest(HttpServletRequest req) {
         return false;
     }
 
@@ -75,11 +75,8 @@ public class ImageUploadHandler extends FileUploadHandler {
                         }
                     }
                     if (!isAllowed) {
-                        String json = JsonSerializer.serialize(500, "文件类型错误", "文件类型错误");
-                        // 写resp
-                        resp.getWriter().write(json);
                         // 抛出文件类型错误异常
-                        throw new UploadFailedException();
+                        throw new UploadFileTypeError("Error: 文件类型错误: " + suffix);
                     } else {
                         // 创建文件
                         File uploadDir = new File(realUploadDirPath);
@@ -95,12 +92,9 @@ public class ImageUploadHandler extends FileUploadHandler {
             }
         } catch (FileUploadException e) {
             e.printStackTrace();
+            throw new UploadFailedException();
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (t != null) {
-                t.delete();
-            }
+            throw new UploadFailedException();
         }
         return null;
     }

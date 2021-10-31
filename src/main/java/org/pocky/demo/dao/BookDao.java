@@ -8,6 +8,7 @@ import java.util.List;
 public interface BookDao {
     /**
      * 检索所有的书籍
+     *
      * @return
      * @throws SQLException
      */
@@ -15,6 +16,7 @@ public interface BookDao {
 
     /**
      * 检索某一页的书籍
+     *
      * @param pageIndex
      * @param pageSize
      * @return
@@ -22,13 +24,13 @@ public interface BookDao {
      */
     public List<Book> findPage(Integer pageIndex, Integer pageSize) throws SQLException;
 
-
     public List<Book> searchByKeywords(String keyword) throws SQLException;
 
     public List<Book> searchPageByKeywords(Integer pageIndex, Integer pageSize, String keyword) throws SQLException;
 
     /**
      * 数量: 所有书籍
+     *
      * @return
      * @throws SQLException
      */
@@ -36,6 +38,7 @@ public interface BookDao {
 
     /**
      * 数量: 包含关键字的书籍
+     *
      * @param keyword
      * @return
      * @throws SQLException
@@ -43,4 +46,12 @@ public interface BookDao {
     public Long countTotalRecordsLimitKeyword(String keyword) throws SQLException;
 
     public int insertOneBook(Book book) throws SQLException;
+
+    /**
+     * param:
+     * ids[][] :
+     * 第一维度 表示要执行多少次SQL操作
+     * 第二维度
+     */
+    public int[] batchDelete(Object[][] params) throws SQLException;
 }

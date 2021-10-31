@@ -11,6 +11,6 @@ import javax.servlet.http.HttpServletResponse;
  * 书籍管理服务
  * 检索服务
  */
-public interface BookService extends BookQueryService, BookAddService {
+public interface BookService extends BookQueryService, BookAddService, BookDeleteService {
     public void processPageQuery(HttpServletRequest req, HttpServletResponse resp) throws QueryPageFailedException;
 }

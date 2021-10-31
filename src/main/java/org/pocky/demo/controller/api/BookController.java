@@ -4,26 +4,34 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.pocky.demo.common.Page;
 import org.pocky.demo.common.PageParam;
 import org.pocky.demo.controller.BaseController;
+import org.pocky.demo.exceptions.bookstore.DeleteBookException;
 import org.pocky.demo.exceptions.bookstore.QueryFailedException;
 import org.pocky.demo.exceptions.bookstore.QueryPageFailedException;
 import org.pocky.demo.factory.JsonSerializer;
 import org.pocky.demo.models.Book;
 import org.pocky.demo.proxy.JsonBookServiceProxy;
+import org.pocky.demo.service.book.BookDeleteService;
 import org.pocky.demo.service.book.BookQueryService;
 import org.pocky.demo.service.book.BookService;
 import org.pocky.demo.service.book.impl.BookServiceImpl;
 import org.pocky.demo.utils.JsonWriter;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(name = "ApiBookController", urlPatterns = {"/admin/api/book"})
 public class BookController extends BaseController {
 
     BookQueryService bookService = new JsonBookServiceProxy();
+
+    BookDeleteService bookDeleteService = new BookServiceImpl();
 
     JsonWriter jsonWriter = new JsonWriter() {
         @Override
@@ -49,7 +57,8 @@ public class BookController extends BaseController {
     }
 
     /**
-     * path: m=pageBook&pageIndex=1&pageSize=5
+     * path: /admin/api/book
+     * param: m=pageBook&pageIndex=1&pageSize=5
      * @param req
      * @param resp
      */
@@ -61,10 +70,19 @@ public class BookController extends BaseController {
             JsonBookServiceProxy jsonBookServiceProxy = (JsonBookServiceProxy) bookService;
             jsonBookServiceProxy.setResponse(resp);
             Page<Book> page = bookService.queryByPageParam(param);
-//            String json = JsonSerializer.serialize(200, "成功", page);
-//            jsonWriter.write(resp, json);
         } catch (QueryPageFailedException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void deleteByIdList(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+        String ids = req.getParameter("ids");
+        String[] vals = ids.split(",");
+        try {
+            bookDeleteService.deleteByIdList(Arrays.asList(vals));
+        } catch (DeleteBookException e) {
+            e.printStackTrace();
+            throw new ServletException();
         }
     }
 }

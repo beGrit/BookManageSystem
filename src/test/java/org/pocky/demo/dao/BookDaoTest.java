@@ -11,8 +11,14 @@ class BookDaoTest {
     BookDao bookDao = new BookDaoImpl();
 
     @Test
+    void findAll() throws SQLException {
+        List<Book> bookList = bookDao.findAll();
+        System.out.println(bookList);
+    }
+
+    @Test
     void findByPage() throws SQLException {
-        List<Book> list = bookDao.findPage(10, 4);
+        List<Book> list = bookDao.findPage(1, 3);
         for (Book book : list) {
             System.out.println(book);
         }
@@ -41,7 +47,7 @@ class BookDaoTest {
         /**
          * 关键字为 "数据库"
          */
-        List<Book> list1 = bookDao.searchByKeywords("数据库");
+        List<Book> list1 = bookDao.searchByKeywords("大学");
         System.out.println(list1);
         /**
          * 关键字为 ""
@@ -60,4 +66,16 @@ class BookDaoTest {
         List<Book> list1 = bookDao.searchPageByKeywords(1, 2, "");
         System.out.println(list1);
     }
+
+    @Test
+    void batchDelete() throws SQLException {
+        Object[][] idList = new Object[2][];
+        idList[0] = new Object[1];
+        idList[0][0] = "b03";
+        idList[1] = new Object[1];
+        idList[1][0] = "b04";
+        int[] ints = bookDao.batchDelete(idList);
+        System.out.println(ints);
+    }
+
 }

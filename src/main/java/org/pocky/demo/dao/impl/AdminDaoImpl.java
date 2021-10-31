@@ -36,4 +36,10 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
         rtn = queryRunner.update(sql, time, id);
         return rtn;
     }
+
+    public int[] batch(Object[][] params) throws SQLException {
+        String sql = "delete from AdminUser where id = ?";
+        int[] rtns = queryRunner.batch(sql, params);
+        return rtns;
+    }
 }

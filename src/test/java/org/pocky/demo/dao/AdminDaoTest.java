@@ -42,4 +42,13 @@ class AdminDaoTest {
             sqlException.printStackTrace();
         }
     }
+
+    @Test
+    void batch() throws SQLException {
+        Object[][] idList = new Object[2][];
+        idList[0] = new Object[]{};
+//        idList[1] = new Object[]{2};
+        int[] rtns = adminDao.batch(idList);
+        System.out.println(rtns);
+    }
 }

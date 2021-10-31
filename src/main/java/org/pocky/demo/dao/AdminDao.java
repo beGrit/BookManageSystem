@@ -12,4 +12,6 @@ public interface AdminDao {
     public AdminUser authentication(String username, String password) throws SQLException;
 
     public int updateLoginTime(AdminUser adminUser, Date time) throws SQLException;
+
+    public int[] batch(Object[][] params) throws SQLException;
 }

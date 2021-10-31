@@ -1,6 +1,7 @@
 package org.pocky.demo.service.book.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.pocky.demo.exceptions.bookstore.DeleteBookException;
 import org.pocky.demo.factory.JsonSerializer;
 import org.pocky.demo.models.Book;
 import org.pocky.demo.common.Page;
@@ -132,6 +133,27 @@ public class BookServiceImpl implements BookService {
         Page<Book> page = this.queryByPageParam(pageParam);
         req.setAttribute("pageContent", page.getPageContentInfo());
         req.setAttribute("pageBar", page.getPageBar());
+    }
+
+    public void deleteByIdList(List<String> idList) throws DeleteBookException {
+        int length = idList.size();
+        Object[][] params = new Object[idList.size()][];
+        Object[] ids = idList.toArray();
+        for (int i = 0; i < length; i++) {
+            params[i] = new Object[1];
+            params[i][0] = ids[i];
+        }
+        try {
+            int[] rtns = bookDao.batchDelete(params);
+            for (int rtn : rtns) {
+                if (rtn == 0) {
+                    throw new DeleteBookException();
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new DeleteBookException();
+        }
     }
 
     // 写Response域的操作

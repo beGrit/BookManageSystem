@@ -10,7 +10,7 @@ public abstract class BaseService {
     ResponseHandler responseHandler = new ResponseHandler() {
         @Override
         public void writeJson(HttpServletResponse resp, String json) {
-            resp.setContentType("json");
+            resp.setContentType("application/json");
             try {
                 resp.getWriter().write(json);
             } catch (IOException e) {

@@ -13,11 +13,13 @@ public class DruidUtil {
 
     static {
         // configuration of dataSource
-        InputStream is = DruidUtil.class.getClassLoader().getResourceAsStream("druid.properties");
+        InputStream is = DruidUtil.class.getClassLoader().getResourceAsStream("druid-ali.properties");
         prop = new Properties();
         try {
             prop.load(is);
             dataSource = DruidDataSourceFactory.createDataSource(prop);
+            // 设置回滚
+            dataSource.getConnection().setAutoCommit(false);
         } catch (Exception e) {
             e.printStackTrace();
         }

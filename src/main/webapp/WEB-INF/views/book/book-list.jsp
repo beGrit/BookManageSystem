@@ -121,7 +121,6 @@
     </div>
     <%--表格--%>
     <table id="demo" lay-filter="tableList">
-
     </table>
 </div>
 <script>
@@ -141,7 +140,7 @@
 
     layui.use('table', () => {
         let table = layui.table
-        table.render({
+/*        table.render({
             elem: '#demo',
             height: '312',
             url: '${pageContext.request.contextPath}/admin/book?m=bookList', // 数据接口,
@@ -155,9 +154,8 @@
                 {field: 'bookNumber', title: '书籍数量'},
             ]],
             parseData: (res) => {
-
             }
-        })
+        })*/
     })
 
     /*用户-停用*/
@@ -194,12 +192,23 @@
     }
 
     function delAll(argument) {
-
-        var data = tableCheck.getData();
-
-        layer.confirm('确认要删除吗？' + data, function (index) {
+        let data = tableCheck.getCheckedBooks();
+        // json序列化
+        layer.confirm(data + '确认要删除吗？', function (index) {
             //捉到所有被选中的，发异步进行删除
+            $.ajax({
+                url: 'http://localhost:8999/book_system/admin/api/book?m=deleteByIdList',
+                type: 'POST',
+                dataType : "json",
+                data: "ids=" + data,
+                success: (res) => {
+                    if (res.code = 200) {
+
+                    }
+                }
+            })
             layer.msg('删除成功', {icon: 1});
+
             $(".layui-form-checked").not('.header').parents('tr').remove();
         });
     }
